@@ -1,3 +1,9 @@
+import { Typography } from '@mui/material';
+
 export const JournalPage = () => {
-    return <div>Juornal Page</div>;
+    return (
+        <>
+            <Typography variant="h2">Juornal Page</Typography>
+        </>
+    );
 };
