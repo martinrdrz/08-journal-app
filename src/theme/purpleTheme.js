@@ -9,7 +9,7 @@ export const purpleTheme = createTheme({
         secondary: {
             main: '#543884',
         },
-        erro: {
+        error: {
             main: red.A400,
         },
     },
