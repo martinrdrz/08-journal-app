@@ -36,22 +36,22 @@ export const RegisterPage = () => {
     const onSubmit = (event) => {
         event.preventDefault();
         setFormSubmitted(true);
-        //if (!isFormValid) return;
+        if (!isFormValid) return;
         dispatch(startCreatingUserWithEmailPassword(formState));
         console.log(formState);
     };
 
     return (
-        <AuthLayout title="Crear cuenta">
+        <AuthLayout title='Crear cuenta'>
             <form onSubmit={onSubmit}>
                 <Grid container>
                     <Grid item xs={12} sx={{ mt: 2 }}>
                         <TextField
-                            label="Nombre completo"
-                            type="text"
-                            placeholder="Nombre completo"
+                            label='Nombre completo'
+                            type='text'
+                            placeholder='Nombre completo'
                             fullWidth
-                            name="displayName"
+                            name='displayName'
                             value={displayName}
                             onChange={onInputChange}
                             error={!!displayNameValid && formSubmitted}
@@ -61,11 +61,11 @@ export const RegisterPage = () => {
 
                     <Grid item xs={12} sx={{ mt: 2 }}>
                         <TextField
-                            label="Correo"
-                            type="email"
-                            placeholder="correo@google.com"
+                            label='Correo'
+                            type='email'
+                            placeholder='correo@google.com'
                             fullWidth
-                            name="email"
+                            name='email'
                             value={email}
                             onChange={onInputChange}
                             error={!!emailValid && formSubmitted}
@@ -75,11 +75,11 @@ export const RegisterPage = () => {
 
                     <Grid item xs={12} sx={{ mt: 2 }}>
                         <TextField
-                            label="Contraseña"
-                            type="password"
-                            placeholder="Contraseña"
+                            label='Contraseña'
+                            type='password'
+                            placeholder='Contraseña'
                             fullWidth
-                            name="password"
+                            name='password'
                             value={password}
                             onChange={onInputChange}
                             error={!!passwordValid && formSubmitted}
@@ -89,15 +89,15 @@ export const RegisterPage = () => {
 
                     <Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
                         <Grid item xs={12}>
-                            <Button variant="contained" fullWidth type="submit">
+                            <Button variant='contained' fullWidth type='submit'>
                                 Crear cuenta
                             </Button>
                         </Grid>
                     </Grid>
 
-                    <Grid container direction="row" justifyContent="end">
+                    <Grid container direction='row' justifyContent='end'>
                         <Typography sx={{ mr: 1 }}>Ya tienes cuenta ?</Typography>
-                        <Link component={RouterLink} color="inherit" to="/auth/login">
+                        <Link component={RouterLink} color='inherit' to='/auth/login'>
                             Ingresar
                         </Link>
                     </Grid>

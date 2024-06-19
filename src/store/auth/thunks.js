@@ -23,7 +23,6 @@ export const startCreatingUserWithEmailPassword = ({ email, password, displayNam
     return async (dispatch) => {
         dispatch(checkingCredentials());
         const resp = await registerUserWithEmailPassword({ email, password, displayName });
-        console.log('respuesta de google');
         console.log(resp);
     };
 };
