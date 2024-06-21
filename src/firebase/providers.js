@@ -1,4 +1,10 @@
-import { GoogleAuthProvider, createUserWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
+import {
+    GoogleAuthProvider,
+    createUserWithEmailAndPassword,
+    signInWithPopup,
+    signOut,
+    updateProfile,
+} from 'firebase/auth';
 import { FirebaseAuth } from './config';
 import { PhotoRounded } from '@mui/icons-material';
 
@@ -38,6 +44,15 @@ export const registerUserWithEmailPassword = async ({ email, password, displayNa
         const resp = await createUserWithEmailAndPassword(FirebaseAuth, email, password);
         const { uid, photoURL } = resp.user;
         console.log(resp);
+        //TODO: actualizar el displayName en Firebase
+        await updateProfile(FirebaseAuth.currentUser, { displayName }); //actualiza el displayName en los datos de firebase para el usuario actual, que es el que se acaba de crear.
+        return {
+            ok: true,
+            uid,
+            photoURL,
+            email,
+            displayName,
+        };
     } catch (error) {
         return { ok: false, errorMessage: error.message };
     }
