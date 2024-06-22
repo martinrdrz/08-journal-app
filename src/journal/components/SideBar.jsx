@@ -12,12 +12,15 @@ import {
     Toolbar,
     Typography,
 } from '@mui/material';
+import { useSelector } from 'react-redux';
 
 export const SideBar = ({ drawerWidth = 240 }) => {
+    const { displayName } = useSelector((state) => state.auth);
+
     return (
-        <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}>
+        <Box component='nav' sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}>
             <Drawer
-                variant="permanent" // temporary
+                variant='permanent' // temporary
                 open
                 sx={{
                     display: { xs: 'block' },
@@ -25,8 +28,8 @@ export const SideBar = ({ drawerWidth = 240 }) => {
                 }}
             >
                 <Toolbar>
-                    <Typography variant="h6" noWrap component="div">
-                        Martin Rodriguez
+                    <Typography variant='h6' noWrap component='div'>
+                        {!!displayName ? displayName : ''}
                     </Typography>
                 </Toolbar>
                 <Divider />

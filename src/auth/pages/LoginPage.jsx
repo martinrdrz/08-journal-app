@@ -20,9 +20,6 @@ export const LoginPage = () => {
 
     const onSubmit = (event) => {
         event.preventDefault();
-        //dispatch(checkingAuthentication());
-        //console.log({ email, password });
-        //TODO: hacer la autenticacion con usuario y contraseña
         dispatch(startLoginWithEmailPassword({ email, password }));
     };
 
@@ -33,7 +30,7 @@ export const LoginPage = () => {
 
     return (
         <AuthLayout title='Login'>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} className='animate__animated animate__fadeIn'>
                 <Grid container>
                     <Grid item xs={12} sx={{ mt: 2 }}>
                         <TextField
