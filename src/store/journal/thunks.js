@@ -1,6 +1,6 @@
 import { collection, doc, setDoc } from 'firebase/firestore';
 import { FirebaseDB } from '../../firebase/config';
-import { addNewEmptyNote, savingNewNote, setActiveNote, setNotes } from './journalSlice';
+import { addNewEmptyNote, savingNewNote, setActiveNote, setNotes, setSaving, updateNote } from './journalSlice';
 import { loadNotes } from '../../helpers';
 
 export const startNewNote = () => {
@@ -31,5 +31,19 @@ export const startLoadingNotes = () => {
         if (!uid) throw new Error('El UID del usuario no existe'); // en teoria nunca deberai entraren esta linea ya que firestore me devuelve un uid valido siempre.
         const notes = await loadNotes(uid);
         dispatch(setNotes(notes));
+    };
+};
+
+export const startSaveNote = () => {
+    return async (dispatch, getState) => {
+        dispatch(setSaving());
+        const { uid } = getState().auth;
+        const { active: note } = getState().journal;
+        const noteToFireStore = { ...note };
+        delete noteToFireStore.id;
+
+        const docRef = doc(FirebaseDB, `${uid}/journal/notes/${note.id}`);
+        await setDoc(docRef, noteToFireStore, { merge: true });
+        dispatch(updateNote(note));
     };
 };
