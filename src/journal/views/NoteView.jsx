@@ -1,4 +1,4 @@
-import { SaveOutlined, UploadOutlined } from '@mui/icons-material';
+import { DeleteOutline, SaveOutlined, UploadOutlined } from '@mui/icons-material';
 import { Button, Grid, IconButton, TextField, Typography } from '@mui/material';
 import { ImageGallery } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
@@ -44,61 +44,71 @@ export const NoteView = () => {
         dispatch(startUploadingFiles(target.files));
     };
 
+    const onDelete = () => {
+        dispatch(startDeletingNote());
+    };
+
     return (
         <Grid
-            className="animate__animated animate__fadeIn"
+            className='animate__animated animate__fadeIn'
             container
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
+            direction='row'
+            justifyContent='space-between'
+            alignItems='center'
             sx={{ mb: 1 }}
         >
             <Grid item>
-                <Typography fontSize={39} fontWeight="light">
+                <Typography fontSize={39} fontWeight='light'>
                     {dateString}
                 </Typography>
             </Grid>
             <Grid item>
                 <input
-                    type="file"
+                    type='file'
                     multiple
                     ref={fileInputRef}
                     onChange={onFileInputChange}
                     style={{ display: 'none' }}
                 />
-                <IconButton color="primary" disabled={isSaving} onClick={() => fileInputRef.current.click()}>
+                <IconButton color='primary' disabled={isSaving} onClick={() => fileInputRef.current.click()}>
                     <UploadOutlined />
                 </IconButton>
 
-                <Button disabled={isSaving} onClick={onSaveNote} color="primary" sx={{ padding: 2 }}>
+                <Button disabled={isSaving} onClick={onSaveNote} color='primary' sx={{ padding: 2 }}>
                     <SaveOutlined sx={{ fontSize: 30, mr: 1 }} />
                     Guardar
                 </Button>
             </Grid>
             <Grid container>
                 <TextField
-                    type="text"
-                    variant="filled"
+                    type='text'
+                    variant='filled'
                     fullWidth
-                    placeholder="Ingrese un titulo"
-                    label="Titulo"
+                    placeholder='Ingrese un titulo'
+                    label='Titulo'
                     sx={{ borde: 'none', mb: 1 }}
-                    name="title"
+                    name='title'
                     value={title}
                     onChange={onInputChange}
                 />
                 <TextField
-                    type="text"
-                    variant="filled"
+                    type='text'
+                    variant='filled'
                     fullWidth
-                    placeholder="Que sucedió en el dia de hoy ?"
+                    placeholder='Que sucedió en el dia de hoy ?'
                     minRows={5}
-                    name="body"
+                    name='body'
                     value={body}
                     onChange={onInputChange}
                 />
             </Grid>
-            <ImageGallery />
+            <Grid container justifyContent='end'>
+                <Button onClick={onDelete} sx={{ mt: 2 }} color='error'>
+                    <DeleteOutline />
+                    Borrar
+                </Button>
+            </Grid>
+            <ImageGallery images={note.imageUrls} />
         </Grid>
     );
 };
